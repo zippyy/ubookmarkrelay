@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ubookmark'
 ]
 
 MIDDLEWARE = [
@@ -68,17 +69,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ubookmark.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+# Defaults vs your settings
 try:
-    from ubookmark.local_settings import LOGGING, DATABASES, DEBUG
-except ModuleNotFoundError:
+    from ubookmark.local_settings import *
+
+except (ModuleNotFoundError, ImportError):
     LOGGING = {}
     # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
     DEBUG = True
-
 
     DATABASES = {
         'default': {
@@ -86,6 +85,21 @@ except ModuleNotFoundError:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+
+    ################################################################################
+    # LDAP: you probably want to set those, if you are using ubookmark
+
+    AUTH_LDAP_SERVER_URI = ""
+
+    AUTH_LDAP_USER_ATTR_MAP = {
+        "first_name": "givenName",
+        "last_name": "sn",
+        "email": "mail"
+    }
+
+    AUTH_LDAP_BIND_PASSWORD = ""
+    AUTH_LDAP_USER_SEARCH = ""
+
 
 
 # Password validation
@@ -125,3 +139,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [ os.path.join(BASE_DIR, "static") ]
+
+
+AUTHENTICATION_BACKENDS = [
+    "django_auth_ldap.backend.LDAPBackend",
+    "django.contrib.auth.backends.ModelBackend"
+]
+
+AUTH_USER_MODEL = 'ubookmark.User'
