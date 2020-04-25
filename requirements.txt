@@ -1,3 +1,4 @@
 django
 django-auth-ldap
 psycopg2
+django-crispy-forms

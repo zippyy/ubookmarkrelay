@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'ubookmark'
 ]
 
@@ -151,3 +152,5 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_USER_MODEL = 'ubookmark.User'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

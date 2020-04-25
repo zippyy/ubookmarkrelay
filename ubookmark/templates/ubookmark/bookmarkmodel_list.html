@@ -1,146 +1,27 @@
-{% load static %}
+{% extends 'ubookmark/base.html' %}
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% autoescape off %}
+    {{ site_description }}
+    {% endautoescape %}
+  </div>
+</div>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static '/css/sticky-footer-navbar.css' %}">
-
-
-    <title>{{ site_name }} powered by ubookmark</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">{{ site_name }}</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          {% if page_obj.has_previous %}
-          <li class="nav-item">
-            <a class="nav-link" href="?page=1">first</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">first</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">previous</a>
-          </li>
-          {% endif %}
-
-          <li class="nav-item active">
-            <a class="nav-link" href="#">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</a>
-          </li>
-          {% if page_obj.has_next %}
-          <li class="nav-item">
-            <a class="nav-link" href="?page={{ page_obj.next_page_number }}">next</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?page={{ page_obj.paginator.num_pages }}">last</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">next</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">last</a>
-          </li>
-          {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-      <div class="container">
-        {% autoescape off %}
-        {{ site_description }}
-        {% endautoescape %}
-      </div>
-    </div>
-
-
-    <div class="container">
-      <ul class="list-group">
-        {% for bookmark in object_list %}
-        <li class="list-group-item">
-          <a href="{{ bookmark.url }}">{{ bookmark.comment }}
-            ({{ bookmark.url }}) </a>
-          <div class="text-muted">
-            (posted by {{ bookmark.owner }} on {{ bookmark.posted_at }})
-            </div>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-<!--
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              {% if page_obj.has_previous %}
-              <li class="page-item">
-                <a class="page-link" href="?page=1">BOTTOM first</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
-              </li>
-              {% else %}
-              <li class="page-item disabled">
-                <a class="page-link" href="#">first</a>
-              </li>
-              <li class="page-item disabled">
-                <a class="page-link" href="#">previous</a>
-              </li>
-              {% endif %}
-
-              <li class="page-item disabled">
-                <a class="page-link" href="#">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</a>
-              </li>
-
-              {% if page_obj.has_next %}
-              <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last</a>
-              </li>
-              {% else %}
-              <li class="page-item disabled">
-                <a class="page-link" href="#">next</a>
-              </li>
-              <li class="page-item disabled">
-                <a class="page-link" href="#">last</a>
-              </li>
-              {% endif %}
-          </nav>
+<div class="container">
+  <div class="row">
+    <ul class="list-group">
+      {% for bookmark in object_list %}
+      <li class="list-group-item">
+        <a href="{{ bookmark.url }}">{{ bookmark.comment }}
+          ({{ bookmark.url }}) </a>
+        <div class="text-muted">
+          (posted by {{ bookmark.owner }} on {{ bookmark.posted_at }})
         </div>
-      </div>
-    </div>
-    -->
-
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted"><a href="http://ungleich.ch/u/projects/ubookmark">ubookmark</a>
-          is a FOSS product created by <a href="https://ungleich.ch">ungleich</a>.</span>
-      </div>
-    </footer>
-
-    <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"</script>
-
-    </body>
-</html>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
