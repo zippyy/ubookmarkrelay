@@ -22,7 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY=get_random_secret_key()
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ "line.schottelius.org",
+                  "ipv6-blog.place7.ungleich.ch",
+                  "localhost:8001",
+                  "localhost" ]
 
 
 # Application definition
