@@ -99,6 +99,7 @@ except (ModuleNotFoundError, ImportError):
     AUTH_LDAP_BIND_PASSWORD = ""
     AUTH_LDAP_USER_SEARCH = ""
 
+    SITE_NAME = "an unconfigured site"
 
 
 # Password validation
