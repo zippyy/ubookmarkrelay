@@ -21,5 +21,7 @@ from ubookmark import views
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('submit/', views.SubmitView.as_view(), name='submit'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.logout_view, name='logout'),
     path('admin/', admin.site.urls),
 ]

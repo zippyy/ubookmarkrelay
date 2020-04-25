@@ -154,3 +154,5 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = 'ubookmark.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGOUT_URL="/logout"
