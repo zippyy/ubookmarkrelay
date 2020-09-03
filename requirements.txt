@@ -1,4 +1,4 @@
-django
+django==3.0.10
 django-auth-ldap
 psycopg2
 django-crispy-forms
